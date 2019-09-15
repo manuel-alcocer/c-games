@@ -48,12 +48,12 @@ int start_race (GD * gd, const int race_num) {
         if (gd->winner >= 0)
             continue;
         advance_one_horse (gd);
+        draw_screen (gd);
         if (gd->winner >= 0)
             continue;
         if (gd->tie_enabled)
-            tiebreak (gd);
-
-        draw_screen (gd);
+            if(tiebreak (gd))
+                draw_screen (gd);
     }
 
     return gd->winner;

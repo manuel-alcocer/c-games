@@ -39,8 +39,9 @@ int tiebreak (GD * gd) {
         gd->ahead_lucky_horse = gd->ahead_horses[c];
         (gd->horses_pos[gd->ahead_lucky_horse])++;
         update_gd_vals (gd);
+        return 1;
     }
-    return gd->winner;
+    return 0;
 }
 
 int advance_one_horse (GD * gd) {
