@@ -14,48 +14,48 @@ void draw_race (GD * gd) {
 }
 
 void draw_track (GD * gd, const int horsenum) {
-    printf ("\t");
-    draw_start_line (horsenum);
     for (int xpos = 0; xpos < gd->track_length; xpos++) {
-        if (xpos >= 0 && xpos < gd->horses_pos[horsenum])
-            draw_track_line (xpos, horsenum, gd);
-        else if (xpos > gd->horses_pos[horsenum] && xpos < gd->track_length - 2)
-            printf (" ");
-        else if (xpos == gd->track_length - 1)
-            draw_endline (xpos, gd);
-        else if (xpos > 0 && xpos == gd->horses_pos[horsenum])
-            draw_horse (xpos, horsenum, gd);
+        if (xpos < gd->horses_pos[horsenum])
+            draw_horse_back (xpos, horsenum, gd);
+        else if (xpos == gd->horses_pos[horsenum])
+            draw_horse ();
+        else if (xpos > gd->horses_pos[horsenum]) 
+            draw_horse_front (xpos, horsenum, gd);
     }
     printf ("\n");
 }
 
-void draw_track_line (const int pos, const int horsenum, GD * gd) {
-    print_color_line (gd, horsenum);
-    if (pos < gd->horses_pos[horsenum])
-        printf (TRACK_PATH);
-    else if (pos == gd->tie_pos)
+void draw_horse_back (const int xpos, const int horsenum, GD * gd) {
+    char * color_line = choose_color_line (gd, horsenum);
+    if (xpos == 0) {
+        printf ("\t");
+        draw_start_line (horsenum);
+    }
+    else if (xpos < gd->tie_pos)
+        printf ("%s" TRACK_PATH, color_line);
+    else if ( xpos == gd->tie_pos)
         printf (TIE_LINE);
+    else
+        printf (" ");
 }
 
-void draw_tie_line (const int pos, const int horsenum, GD * gd) {
-    if (pos == gd->tie_pos && gd->tie_enabled && gd->horses_pos[horsenum] >= gd->tie_pos + 1)
-        printf (TIE_LINE);
+void draw_horse_front (const int xpos, const int horsenum, GD * gd) {
+
 }
 
-void draw_horse (const int pos, const int horsenum, GD * gd) {
+void draw_horse (void) {
     printf (ANSI_COLOR_RESET " " HORSE_DRAW);
 }
 
-void draw_endline (const int pos, GD * gd) {
-    if (pos == gd->track_length - 1)
-        printf (END_LINE);
+void draw_endline () {
+    printf ("  " END_LINE);
 }
 
-void print_color_line (GD * gd, const int horsenum) {
+char * choose_color_line (GD * gd, const int horsenum) {
     if (gd->horses_pos[horsenum] == gd->ahead_pos)
-        printf (WINNER_COLOR);
+        return WINNER_COLOR;
     else
-        printf (ANSI_COLOR_RESET);
+        return ANSI_COLOR_RESET;
 }
 
 void draw_start_line (const int horsenum) {
