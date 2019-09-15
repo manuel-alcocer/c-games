@@ -10,6 +10,7 @@ GD * init_gamedata (GD * gd) {
     gd->track_length = TRACK_LENGTH;
     gd->tie_enabled = 0;
     gd->tie_pos = (gd->track_length * TIE_LIMIT) / 100;
+    gd->scrtln = TRACK_LENGTH * TRACK_PATH_WIDTH + HORSE_DRAW_WIDTH + END_LINE_WIDTH;
     return gd;
 }
 

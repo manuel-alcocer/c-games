@@ -23,7 +23,7 @@
 #define SPEED 97           // (L) 0 - (H) 99
 #define SPEED_FACTOR 10
 
-#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_RED     "\x1b[91m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"
 #define ANSI_COLOR_BLUE    "\x1b[34m"
@@ -33,11 +33,25 @@
 
 #define WINNER_COLOR ANSI_COLOR_GREEN
 
-#define START_GRID "\u2520"
+#define HORSENUM_WIDTH 2
+
+#define BEGIN_OFFSET "        "
+#define BEGIN_OFFSET_WIDTH 8
+
+#define START_GRID " \u2520"
+#define START_GRID_WIDTH 2
+
 #define TRACK_PATH "\u2500"
-#define HORSE_DRAW "~\u256d\u2500\u256e^"
+#define TRACK_PATH_WIDTH 1
+
+#define HORSE_DRAW " ~\u256d\u2500\u256e^"
+#define HORSE_DRAW_WIDTH 6
+
 #define TIE_LINE "\u250a"
+#define TIE_LINE_WIDTH 1
+
 #define END_LINE "\u250b"
+#define END_LINE_WIDTH 1
 
 typedef struct _horse {
     int horsenum;
@@ -61,6 +75,7 @@ typedef struct _gamedata {
     int track_length;
     int tie_enabled;
     int tie_pos;
+    int scrtln;
     int * ahead_horses;
     int * horses_pos;
 } GD;
@@ -89,7 +104,7 @@ void draw_track (GD * gd, const int horsenum);
 void draw_start_line (const int horsenum);
 void draw_tie_line (const int pos, const int horsenum, GD * gd);
 void draw_horse (void);
-void draw_endline (void);
+void draw_endline (const int horsenum, GD *gd);
 void draw_horse_back (const int xpos, const int horsenum, GD * gd);
 void draw_horse_front (const int xpos, const int horsenum, GD * gd);
 char * choose_color_line (GD * gd, const int horsenum);

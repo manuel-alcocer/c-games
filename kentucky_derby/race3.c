@@ -38,6 +38,7 @@ int start_race (GD * gd) {
     advance_all_horses (gd);
     draw_screen (gd);
     advance_one_horse (gd);
+    draw_screen (gd);
     if (gd->tie_enabled)
         tiebreak (gd);
     draw_screen (gd);
