@@ -38,6 +38,7 @@ int run_game (GD * gd) {
         i++;
         gd = init_gamedata (gd);
     }
+    return i;
 }
 
 int start_race (GD * gd, const int race_num) {
