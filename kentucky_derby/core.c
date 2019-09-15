@@ -45,7 +45,7 @@ int tiebreak (GD * gd) {
 }
 
 int advance_one_horse (GD * gd) {
-    gd->lucky_horse = gen_randnum(1, gd->horses_num);
+    gd->lucky_horse = gen_randnum(0, gd->horses_num - 1);
     (gd->horses_pos[gd->lucky_horse])++;
     update_gd_vals (gd);
 
