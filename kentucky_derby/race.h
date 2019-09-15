@@ -14,6 +14,7 @@
 
 #define clearscr() printf("\033[H\033[J")
 
+#define DEFRACES 10
 #define DEFHORSES 7
 #define MINHORSES 2
 
@@ -66,6 +67,8 @@ typedef struct _stats {
 } RACESTATS;
 
 typedef struct _gamedata {
+    int num_races;
+    int race_num;
     int horses_num;
     int ahead_horses_num;
     int ahead_pos;
@@ -80,11 +83,11 @@ typedef struct _gamedata {
     int * horses_pos;
 } GD;
 
-int start_race (GD * gd);
+int start_race (GD * gd, const int race_num);
+int run_game (GD * gd);
 
-int * advance_all_horses (GD * gd);
-int * advance_one_horse (GD * gd);
-
+int advance_all_horses (GD * gd);
+int advance_one_horse (GD * gd);
 int tiebreak (GD * gd);
 
 GD * init_gamedata (GD * gd);

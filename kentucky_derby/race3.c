@@ -23,25 +23,38 @@ int main (int argc, char **argv) {
 
     gd = init_gamedata (gd);
 
-    while (gd->winner < 0){
-        start_race (gd);
-        if (gd->winner >= 0)
-            sleep (2);
-    }
+    run_game (gd);
 
     free (gd->horses_pos);
     free (gd->ahead_horses);
     exit (0);
 }
 
-int start_race (GD * gd) {
-    advance_all_horses (gd);
-    draw_screen (gd);
-    advance_one_horse (gd);
-    draw_screen (gd);
-    if (gd->tie_enabled)
-        tiebreak (gd);
-    draw_screen (gd);
+int run_game (GD * gd) {
+    int i = 0;
+    while (i < gd->num_races){
+        start_race (gd, i + 1);
+        sleep (2);
+        i++;
+        gd = init_gamedata (gd);
+    }
+}
+
+int start_race (GD * gd, const int race_num) {
+    gd->race_num = race_num;
+    while (gd->winner < 0){
+        advance_all_horses (gd);
+        draw_screen (gd);
+        if (gd->winner >= 0)
+            continue;
+        advance_one_horse (gd);
+        if (gd->winner >= 0)
+            continue;
+        if (gd->tie_enabled)
+            tiebreak (gd);
+
+        draw_screen (gd);
+    }
 
     return gd->winner;
 }

@@ -11,6 +11,8 @@ GD * init_gamedata (GD * gd) {
     gd->tie_enabled = 0;
     gd->tie_pos = (gd->track_length * TIE_LIMIT) / 100;
     gd->scrtln = TRACK_LENGTH * TRACK_PATH_WIDTH + HORSE_DRAW_WIDTH + END_LINE_WIDTH;
+    gd->num_races = DEFRACES;
+    gd->race_num = 0;
     return gd;
 }
 
@@ -22,12 +24,12 @@ GD * update_gd_vals (GD * gd) {
     return gd;
 }
 
-int * advance_all_horses (GD * gd){
+int advance_all_horses (GD * gd){
     for (int i = 0; i < gd->horses_num; i++)
         (gd->horses_pos[i])++;
     update_gd_vals (gd);
 
-    return gd->horses_pos;
+    return gd->winner;
 }
 
 int tiebreak (GD * gd) {
@@ -38,15 +40,15 @@ int tiebreak (GD * gd) {
         (gd->horses_pos[gd->ahead_lucky_horse])++;
         update_gd_vals (gd);
     }
-    return gd->ahead_horses_num;
+    return gd->winner;
 }
 
-int * advance_one_horse (GD * gd) {
+int advance_one_horse (GD * gd) {
     gd->lucky_horse = gen_randnum(1, gd->horses_num);
     (gd->horses_pos[gd->lucky_horse])++;
     update_gd_vals (gd);
 
-    return gd->horses_pos;
+    return gd->winner;
 }
 
 int update_ahead_pos (GD * gd) {

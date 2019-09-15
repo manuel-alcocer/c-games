@@ -81,9 +81,11 @@ void print_gd (GD * gd, int clr) {
     if (clr)
         clearscr();
     printf (ANSI_COLOR_RED);
-    printf ("\n  Horses num: %2d - Ahead horses num: %2d - Ahead pos: %3d - Winner: %2d - Track length: %3d - Tie: (%d) %3d)\n"
+    printf ("  RACE NUM:%3d/%-3d"
+            "\n  Horses num: %2d - Ahead horses num: %2d - Ahead pos: %3d - Winner: %2d - Track length: %3d - Tie: (%d) %3d)\n"
             "\n  \tAhead horse list: [",
-                gd->horses_num, gd->ahead_horses_num, gd->ahead_pos, gd->winner, gd->track_length, gd->tie_enabled, gd->tie_pos);
+                gd->race_num, gd->num_races, gd->horses_num, gd->ahead_horses_num, gd->ahead_pos, gd->winner,
+                gd->track_length, gd->tie_enabled, gd->tie_pos);
     for (int i = 0; i < gd->horses_num; i++)
         printf ("%3d ", gd->ahead_horses[i]);
     printf ("] - Last Lucky horse: %2d\n"
