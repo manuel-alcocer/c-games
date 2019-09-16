@@ -1,4 +1,5 @@
-#include "race.h"
+#include "core.h"
+#include "draw.h"
 
 void draw_screen (GD *gd) {
     print_gd (gd, 1);

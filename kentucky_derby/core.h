@@ -1,5 +1,5 @@
-#ifndef _RACE_H
-#define _RACE_H
+#ifndef _CORE_H
+#define _CORE_H
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
@@ -12,9 +12,15 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+
 #define clearscr() printf("\033[H\033[J")
 
+#ifndef TUI
 #define DEFRACES 10
+#else
+#define DEFRACES 1
+#endif
+
 #define DEFHORSES 7
 #define MINHORSES 2
 
@@ -83,8 +89,17 @@ typedef struct _gamedata {
     int * horses_pos;
 } GD;
 
+#ifdef TUI
+#include "ncdraw.h"
+#endif
+
+#ifndef TUI
 int start_race (GD * gd, const int race_num);
 int run_game (GD * gd);
+#else
+int start_race (GD * gd, const int race_num, NCWINS *ncgamewins);
+int run_game (GD * gd, NCWINS *ncw);
+#endif
 
 int advance_all_horses (GD * gd);
 int advance_one_horse (GD * gd);
@@ -99,17 +114,5 @@ int * update_ahead_horses (GD * gd);
 
 void wait_for_secs (const int secs, const int nanosecs);
 int gen_randnum(const int min, const int max);
-
-void print_gd (GD * gd, int clr);
-void draw_race (GD * gd);
-void draw_screen (GD *gd);
-void draw_track (GD * gd, const int horsenum);
-void draw_start_line (const int horsenum);
-void draw_tie_line (const int pos, const int horsenum, GD * gd);
-void draw_horse (void);
-void draw_endline (const int horsenum, GD *gd);
-void draw_horse_back (const int xpos, const int horsenum, GD * gd);
-void draw_horse_front (const int xpos, const int horsenum, GD * gd);
-char * choose_color_line (GD * gd, const int horsenum);
 
 #endif

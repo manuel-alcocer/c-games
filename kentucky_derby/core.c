@@ -1,4 +1,4 @@
-#include "race.h"
+#include "core.h"
 
 GD * init_gamedata (GD * gd) {
     gd->horses_pos = (int *) calloc (gd->horses_num, sizeof (int));
