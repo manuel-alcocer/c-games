@@ -10,7 +10,10 @@ int initncscreen (void) {
 }
 
 NCWINS * ncinit_wins (void) {
+    NCWINS *ncw = (NCWINS *) malloc (sizeof (NCWINS));
+    ncw->status_win = (WINDOW *) malloc (sizeof (WINDOW));
 
+    return ncw;
 }
 
 // MAIN Function for NCURSES
@@ -22,7 +25,7 @@ int ncdraw_screen (GD * gd, NCWINS *ncw) {
 }
 
 int ncdraw_gdwin (GD * gd, NCWINS *ncw) {
-    ncw->status_win = (WINDOW *) malloc (sizeof (WINDOW));
+
 }
 
 void ncprint_gd (GD * gd) {

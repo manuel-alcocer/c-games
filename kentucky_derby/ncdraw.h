@@ -16,6 +16,6 @@ int ncdraw_screen (GD * gd, NCWINS *ncw);
 int ncdraw_gdwin (GD * gd, NCWINS *ncw);
 void ncprint_gd (GD * gd);
 
-NCWINS * ncinit_wins (void);
+NCWINS * init_ncwins (NCWINS *ncw);
 
 #endif

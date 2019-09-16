@@ -21,7 +21,7 @@
 int main (int argc, char **argv) {
     GD _gamedata, *gd = &_gamedata;
 #ifdef TUI
-    NCWINS *ncgamewins;
+    NCWINS *game_ncwins;
 #endif
 
 
@@ -38,7 +38,7 @@ int main (int argc, char **argv) {
     run_game (gd);
 #else
     initncscreen ();
-    ncgamewins = ncinit_wins ();
+    ncgamewins = init_ncwins (game_ncwins);
     run_game (gd, ncgamewins);
     free (ncgamewins->status_win);
     endwin ();
