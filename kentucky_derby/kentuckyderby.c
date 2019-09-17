@@ -38,9 +38,9 @@ int main (int argc, char **argv) {
     run_game (gd);
 #else
     initncscreen ();
-    ncgamewins = init_ncwins (game_ncwins);
-    run_game (gd, ncgamewins);
-    free (ncgamewins->status_win);
+    game_ncwins = init_ncwins ();
+    run_game (gd, game_ncwins);
+    //free (game_ncwins->status_win);
     endwin ();
 #endif
 
