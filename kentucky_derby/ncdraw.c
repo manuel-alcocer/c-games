@@ -11,22 +11,24 @@ int initncscreen (void) {
 
 NCWINS * init_ncwins (void) {
     NCWINS *ncw = (NCWINS *) malloc (sizeof (NCWINS));
-    
+
     getmaxyx (stdscr, ncw->maxy, ncw->maxx);
     box(stdscr, 0, 0);
+    refresh();
     ncw->status_win = draw_status_win (ncw);
 
     return ncw;
 }
 
 WINDOW * draw_status_win (NCWINS * ncw) {
-    WINDOW *local_win = newwin (ncw->maxy - 2, ncw->maxx - 2, 1, 1);
+    WINDOW *local_win = newwin (6, ncw->maxx - 2, 1, 1);
     return local_win;
 }
 
 int ncdraw_screen (GD * gd, NCWINS *ncw) {
     ncdraw_gdwin (gd, ncw);
-    refresh();
+    box (ncw->status_win, 0, 0);
+    wrefresh(ncw->status_win);
     wait_for_secs (0, (1000 - SPEED * SPEED_FACTOR) * 1e6);
 
 }
