@@ -40,8 +40,8 @@ int main (int argc, char **argv) {
     initncscreen ();
     game_ncwins = init_ncwins ();
     run_game (gd, game_ncwins);
-    //free (game_ncwins->status_win);
     endwin ();
+    free (game_ncwins);
 #endif
 
     free (gd->horses_pos);
@@ -97,7 +97,7 @@ int start_race (GD * gd, const int race_num, NCWINS *ncgamewins) {
 #ifndef TUI
                 draw_screen (gd);
 #else
-        ncdraw_screen (gd, ncgamewins);
+                ncdraw_screen (gd, ncgamewins);
 #endif
     }
 

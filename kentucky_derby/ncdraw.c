@@ -26,11 +26,16 @@ WINDOW * draw_status_win (NCWINS * ncw) {
 }
 
 int ncdraw_screen (GD * gd, NCWINS *ncw) {
+    clear_status_win (ncw);
     ncdraw_gdwin (gd, ncw);
     box (ncw->status_win, 0, 0);
     wrefresh(ncw->status_win);
     wait_for_secs (0, (1000 - SPEED * SPEED_FACTOR) * 1e6);
 
+}
+
+int clear_status_win (NCWINS *ncw) {
+    
 }
 
 int ncdraw_gdwin (GD * gd, NCWINS *ncw) {
@@ -40,14 +45,14 @@ int ncdraw_gdwin (GD * gd, NCWINS *ncw) {
 void ncprint_gd (GD * gd, NCWINS * ncw) {
     wmove (ncw->status_win, 0,0);
     wprintw (ncw->status_win, "  RACE NUM:%3d/%-3d"
-            "\n  Horses num: %2d - Ahead horses num: %2d - Ahead pos: %3d - Winner: %2d - Track length: %3d - Tie: (%d) %3d)\n"
-            "\n  \tAhead horse list: [",
+            "Horses num: %2d - Ahead horses num: %2d - Ahead pos: %3d - Winner: %2d - Track length: %3d - Tie: (%d) %3d)"
+            "Ahead horse list: [",
                 gd->race_num, gd->num_races, gd->horses_num, gd->ahead_horses_num, gd->ahead_pos, gd->winner,
                 gd->track_length, gd->tie_enabled, gd->tie_pos);
     for (int i = 0; i < gd->horses_num; i++)
         wprintw (ncw->status_win, "%3d ", gd->ahead_horses[i]);
     wprintw (ncw->status_win, "] - Last Lucky horse: %2d\n"
-            "  \t      Horse list: [",
+            "Horse list: [",
                 gd->ahead_lucky_horse);
     for (int i = 0; i < gd->horses_num; i++)
         wprintw (ncw->status_win, "%3d ", gd->horses_pos[i]);

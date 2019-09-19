@@ -22,5 +22,6 @@ int ncdraw_screen (GD * gd, NCWINS *ncw);
 int ncdraw_gdwin (GD * gd, NCWINS *ncw);
 void ncprint_gd (GD * gd, NCWINS *ncw);
 
+int clear_status_win (NCWINS *ncw);
 
 #endif
