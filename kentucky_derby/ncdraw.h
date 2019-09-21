@@ -15,7 +15,7 @@ int initncscreen (void);
 
 NCWINS * init_ncwins (void);
 
-WINDOW * draw_status_win (NCWINS * ncw);
+WINDOW * init_status_win (NCWINS * ncw);
 
 int ncdraw_screen (GD * gd, NCWINS *ncw);
 
