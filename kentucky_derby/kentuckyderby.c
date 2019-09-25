@@ -17,13 +17,11 @@
 #include "ncdraw.h"
 #endif
 
-
 int main (int argc, char **argv) {
     GD _gamedata, *gd = &_gamedata;
 #ifdef TUI
-    NCWINS *game_ncwins;
+    NCWINS _game_ncwins, *ncw = &_game_ncwins;
 #endif
-
 
     if (argc < 2)
         gd->horses_num = DEFHORSES;
@@ -38,10 +36,9 @@ int main (int argc, char **argv) {
     run_game (gd);
 #else
     initncscreen ();
-    game_ncwins = init_ncwins ();
-    run_game (gd, game_ncwins);
+    init_ncwins (ncw, gd);
+    run_game (gd, ncw);
     endwin ();
-    free (game_ncwins);
 #endif
 
     free (gd->horses_pos);

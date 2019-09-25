@@ -1,7 +1,7 @@
 kentucky.o: kentuckyderby.c core.c core.h draw.c draw.h banner.txt
 	cc -o ./kentucky.o ./kentuckyderby.c ./core.c ./draw.c
 
-kentuckync.o: kentuckyderby.c core.c core.h ncdraw.c ncdraw.h banner.txt
+kentuckync.o: kentuckyderby.c core.c core.h ncdraw.c ncdraw.h nccore.c nccore.h banner.txt
 	cc -o ./kentuckync.o -DTUI -lncurses ./kentuckyderby.c ./core.c ./ncdraw.c
 
 all:
